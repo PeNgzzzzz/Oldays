@@ -1,7 +1,10 @@
 # CS-348
 CS 348 Project
+
 FrontEnd: JavaScript(React) + HTML + CSS
+
 BackEnd: Java
+
 Database: MySQL
 
 We plan to create an app for those who love music to recommend, search and rate music, the data is from Saurabh Shahane in Kaggle.
