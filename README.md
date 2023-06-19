@@ -26,4 +26,5 @@ TBD
 2. Simple test input and output (test-sample.sql, test-sample.out).
 3. Search songs with input lyrics.
 4. Rate songs.
-5. Users sign in, sign up (TBD).
+5. Login system.
+6. Provide recommendation songs for users.
