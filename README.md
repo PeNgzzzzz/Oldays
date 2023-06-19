@@ -8,6 +8,7 @@ BackEnd: Java
 Database: MySQL
 
 We plan to create an app for those who love music to recommend, search and rate music, the data is from Saurabh Shahane in Kaggle.
+https://www.kaggle.com/datasets/saurabhshahane/music-dataset-1950-to-2019.
 
 We have provided simple "hello world" code on both frontend (React) and backend (Java).
 
