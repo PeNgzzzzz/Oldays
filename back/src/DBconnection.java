@@ -17,9 +17,9 @@ public class DBconnection {
 
         try {
             // connecting to the a database
-            String url = "jdbc:mysql://localhost:3306/my_schema";
-            String name = "ZhouChen";
-            String password = "1234567890";
+            String url = "jdbc:mysql://localhost:3306/test";
+            String name = "test";
+            String password = "test";
             connection = DriverManager
                     .getConnection(url, name, password);
             System.out.println("Database connection open.\n");
@@ -52,7 +52,7 @@ public class DBconnection {
         try{
             stmt = connection.createStatement();
             String sql;
-            sql = "SELECT name FROM new_table";
+            sql = "SELECT * FROM Users";
             ResultSet rs = stmt.executeQuery(sql);
             while(rs.next()){
                 String name = rs.getString("name");
