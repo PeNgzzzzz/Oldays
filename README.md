@@ -19,6 +19,13 @@ Frontend: You may find the readme file under front folder helpful to run the rea
 
 Backend: Now some simple code is included in back end. It connects to our local MySQL database and execute a query that displays a column from the table.
 
+## Setting Up the Database
+1. [Install MySQL Community Server](https://dev.mysql.com/downloads/mysql/).
+2. [Install MySQL MySQL Workbench](https://dev.mysql.com/downloads/workbench/).
+3. Create a new connection named **test** on localhost in MySQL Workbench.
+4. Run the query **sql/initDatabase.sql** in the Workbench.
+5. Now you have the sample database established.
+
 # Current Features
 TBD
 
