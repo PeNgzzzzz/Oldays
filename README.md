@@ -15,7 +15,7 @@ We have provided simple "hello world" code on both frontend (React) and backend 
 
 # How to Start
 
-Frontend: You may find the [readme file](front/readme.md) under front folder helpful to run the react component.
+Frontend: You may find the [readme file](front/README.md) under front folder helpful to run the react component.
 
 Backend: Now some simple code is included in back end. It connects to our local MySQL database and execute a query that displays a column from the table.
 
