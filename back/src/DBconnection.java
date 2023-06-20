@@ -1,9 +1,10 @@
 import java.sql.*;
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 
 public class DBconnection {
-    private Scanner input = new Scanner(System.in);
     private Connection connection = null;
 
     public DBconnection(String[] args) {
@@ -44,20 +45,42 @@ public class DBconnection {
     }
 
     public void mainMenu(String[] args) throws SQLException {
-        this.showTable();
+        this.showAllMusics();
     }
 
-    private void showTable() {
+    private void showAllMusics() {
         Statement stmt = null;
         try{
             stmt = connection.createStatement();
             String sql;
-            sql = "SELECT * FROM Users";
+            sql = "SELECT mName FROM Musics";
             ResultSet rs = stmt.executeQuery(sql);
             while(rs.next()){
-                String name = rs.getString("name");
-                System.out.print("name: " + name);
+                String mName = rs.getString("mName");
+                System.out.print("Music name: " + mName);
                 System.out.print("\n");
+            }
+            rs.close();
+            stmt.close();
+        }catch(SQLException se){
+            se.printStackTrace();
+        }
+    }
+
+    private void searchMusics(String lyrics) {
+        Statement stmt = null;
+        try{
+            stmt = connection.createStatement();
+            String sql;
+            sql = "SELECT mName FROM Musics where lyrics LIKE \'%" + lyrics + "%\'";
+            ResultSet rs = stmt.executeQuery(sql);
+            if (!rs.next()) { System.out.println("No music found in the database"); }
+            else {
+                do {
+                    String mName = rs.getString("mName");
+                    System.out.print("Found music name: " + mName);
+                    System.out.print("\n");
+                } while(rs.next());
             }
             rs.close();
             stmt.close();
@@ -69,6 +92,18 @@ public class DBconnection {
 
     public static void main(String [] args) throws Exception {
         DBconnection menu = new DBconnection(args);
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+
+        System.out.println("Search music by lyrics");
+        System.out.println("Enter some lyrics: ");
+        try {
+            String lyrics = input.readLine();
+
+            menu.searchMusics(lyrics);
+        }
+        catch (Exception e) {
+            System.out.println("Something went wrong!");
+        }
         menu.mainMenu(args);
         menu.exit();
     }
