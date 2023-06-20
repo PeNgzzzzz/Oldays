@@ -17,7 +17,7 @@ We have provided simple "hello world" code on both frontend (React) and backend 
 
 Frontend: You may find the [readme file](front/README.md) under front folder helpful to run the react component.
 
-Backend: Now some simple code is included in back end. It connects to our local MySQL database and execute a query that displays a column from the table.
+Backend: We use the Oracle OpenJDK Version 1.8.0_331 and IntelliJ build system to compile, build and run the Java code.
 
 ## Setting Up the Database
 1. [Install MySQL Community Server](https://dev.mysql.com/downloads/mysql/).
