@@ -19,6 +19,8 @@ Frontend: You may find the [readme file](front/README.md) under front folder hel
 
 Backend: We use the Oracle OpenJDK Version 1.8.0_331 and IntelliJ build system to compile, build and run the Java code.
 
+Remember to install [Connector/J](https://dev.mysql.com/downloads/connector/j/) driver to connect MySQL on Java.
+
 ## Setting Up the Database
 1. [Install MySQL Community Server](https://dev.mysql.com/downloads/mysql/).
 2. [Install MySQL MySQL Workbench](https://dev.mysql.com/downloads/workbench/).
