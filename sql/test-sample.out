@@ -1,0 +1,56 @@
+-- Assume addTestMusics.sql and addTestUsers.sql have been run
+
+-- Assume user with userName testUser1 is rating on music with mID 1
+INSERT INTO Reviews (userName, mID, rating, comment) VALUES ('testUser1', 1, 88.88, 'nice song!');
+
+Query OK, 1 row affected (0.00 sec)
+
+SELECT * FROM Reviews;
+
++-----+-----------+------+--------+------------+
+| rID | userName  | mID  | rating | comment    |
++-----+-----------+------+--------+------------+
+|   1 | testUser1 |    1 |  88.88 | nice song! |
++-----+-----------+------+--------+------------+
+1 row in set (0.00 sec)
+
+-- Assume user wants to see all musics in the database
+SELECT mName FROM Musics;
+
++----------------------+
+| mName                |
++----------------------+
+| mohabbat bhi jhoothi |
+| miles to go          |
+| it is love           |
++----------------------+
+3 rows in set (0.01 sec)
+
+-- Assume user with username testUser1 deletes his account, so his reviews will be deleted as well
+DELETE FROM Users WHERE userName LIKE 'testUser1';
+
+Query OK, 1 row affected (0.00 sec)
+
+SELECT * FROM Users;
+
++-----------+------------+------------+----------------+----------+
+| userName  | fName      | lName      | email          | pwd      |
++-----------+------------+------------+----------------+----------+
+| testUser2 | testFname2 | testLname2 | test2@test.com | testPwd2 |
+| testUser3 | testFname3 | testLname3 | test3@test.com | testPwd3 |
++-----------+------------+------------+----------------+----------+
+2 rows in set (0.00 sec)
+
+SELECT * FROM Reviews;
+
+Empty set (0.00 sec)
+
+-- Assume user wants to search for a song that contains hours in lyrics
+SELECT mName FROM Musics where lyrics LIKE '%hours%'
+
++-------------+
+| mName       |
++-------------+
+| miles to go |
++-------------+
+1 row in set (0.00 sec)

@@ -15,25 +15,28 @@ CREATE TABLE Users
 
 CREATE TABLE Musics
   ( 
-    mID  INT NOT NULL PRIMARY KEY, 
+    mID  INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
     mName VARCHAR(50),
     genre VARCHAR(30),
     topic VARCHAR(30),
     lyrics text,
-    aID INT REFERENCES Artists
+    aID INT REFERENCES Artists(aID)
   ); 
 
 CREATE TABLE Artists
   ( 
-    aID INT NOT NULL PRIMARY KEY,
+    aID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     aName VARCHAR(30)
   ); 
 
 CREATE TABLE Reviews
   ( 
-    userName VARCHAR(50) REFERENCES Users,
-    mID INT REFERENCES Musics,
-    rating FLOAT(10, 5),
-    comment text,
-    PRIMARY KEY(userName, mID)
+    rID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    userName VARCHAR(50) NOT NULL,
+    mID INT REFERENCES Musics(mID),
+    rating DOUBLE CHECK (rating >= 0 AND rating <= 100),
+    comment TEXT,
+    -- In case users delete their account
+    CONSTRAINT FOREIGN KEY (userName) REFERENCES Users(userName) ON DELETE CASCADE
   ); 
+  

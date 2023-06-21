@@ -1,7 +1,6 @@
 import java.sql.*;
+import java.util.Objects;
 import java.util.Scanner;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
 
 public class DBconnection {
@@ -44,9 +43,6 @@ public class DBconnection {
         }
     }
 
-    public void mainMenu(String[] args) throws SQLException {
-        this.showAllMusics();
-    }
 
     private void showAllMusics() {
         Statement stmt = null;
@@ -67,12 +63,12 @@ public class DBconnection {
         }
     }
 
-    private void searchMusics(String lyrics) {
+    private void searchMusicsByLyrics(String lyrics) {
         Statement stmt = null;
         try{
             stmt = connection.createStatement();
             String sql;
-            sql = "SELECT mName FROM Musics where lyrics LIKE \'%" + lyrics + "%\'";
+            sql = "SELECT mName FROM Musics where lyrics LIKE '%" + lyrics + "%'";
             ResultSet rs = stmt.executeQuery(sql);
             if (!rs.next()) { System.out.println("No music found in the database"); }
             else {
@@ -89,22 +85,56 @@ public class DBconnection {
         }
     }
 
+    private void rateMusics(String userName, Integer mID, double rate, String comment) {
+        PreparedStatement stmt = null;
+        try{
+            String sql;
+            sql = "INSERT INTO Reviews (userName, mID, rating, comment) VALUES (?, ?, ?, ?)";
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, userName);
+            stmt.setInt(2, mID);
+            stmt.setDouble(3, rate);
+            stmt.setString(4, comment);
+            stmt.execute();
+            connection.commit();
+            System.out.println("Comment added!");
+            stmt.close();
+        }catch(SQLException se){
+            se.printStackTrace();
+        }
+    }
 
     public static void main(String [] args) throws Exception {
-        DBconnection menu = new DBconnection(args);
-        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-
-        System.out.println("Search music by lyrics");
-        System.out.println("Enter some lyrics: ");
-        try {
-            String lyrics = input.readLine();
-
-            menu.searchMusics(lyrics);
+        DBconnection db = new DBconnection(args);
+        Scanner input = new Scanner(System.in);
+        System.out.println("Please enter the command (q to quit)");
+        System.out.println("\"search\" to search a song by lyrics");
+        System.out.println("\"rate\" to rate a song");
+        System.out.println("\"show\" to show all musics in the database");
+        while (true) {
+            String line = input.nextLine();
+            if (Objects.equals(line, "q")) break;
+            if (Objects.equals(line, "search")) {
+                System.out.println("Please type some lyrics");
+                String lyrics = input.nextLine();
+                db.searchMusicsByLyrics(lyrics);
+            } else if (Objects.equals(line, "rate")) {
+                // Assume the given mID exists in the database
+                String userName = "test1";
+                System.out.println("Please type mID");
+                Integer mID = input.nextInt();
+                input.nextLine();
+                System.out.println("Please type your rating (out of 100)");
+                double rate = input.nextDouble();
+                input.nextLine();
+                System.out.println("Please type your comment");
+                String comment = input.nextLine();
+                db.rateMusics(userName, mID, rate, comment);
+            } else if (Objects.equals(line, "show")) {
+                db.showAllMusics();
+            }
+            else System.out.println("Unknown command, please try again!");
         }
-        catch (Exception e) {
-            System.out.println("Something went wrong!");
-        }
-        menu.mainMenu(args);
-        menu.exit();
+        db.exit();
     }
 }
