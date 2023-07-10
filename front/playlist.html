@@ -217,14 +217,20 @@
   function handleKeyUp(event) {
     if (event.key === "Enter") {
       var songName = document.getElementById('mySearch').value;
-      fetch(`http://localhost:8081/search?songName=${encodeURIComponent(songName)}`)
+      fetch(`http://localhost:8081/search`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({songName: songName})
+      })
         .then(response => response.json())
         .then(data => {
           if (data.found) {
             var username = localStorage.getItem('username');
             var url = `./song.html?songName=${encodeURIComponent(songName)}`;
             if (username) {
-              url += `&username=${encodeURIComponent(username)}`;
+              url += `&username=${username}`;
             }
             window.location.href = url;
           } else {
@@ -236,8 +242,6 @@
         });
     }
   }
-
-
 </script>
 
 <script>
@@ -266,7 +270,13 @@
 
     var musicContainers = document.getElementsByClassName('musicContainer');
 
-    fetch('http://localhost:8081/playListFive?username=${username}')
+    fetch('http://localhost:8081/playListFive', {
+      method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({username: username})
+    })
       .then(response => response.json())
       .then(data => {
         for (var i = 0; i < data.length; i++) {
@@ -280,9 +290,9 @@
           h3Elements[0].textContent = 'Artist: ' + data[i].artist;
           h3Elements[1].textContent = 'Genre: ' + data[i].genre;
 
-          aElement.href = `./song.html?songName=${encodeURIComponent(songName)}`;
+          aElement.href = `./song.html?songName=${encodeURIComponent(data[i].songName)}`;
           if (username) {
-            aElement.href += `&username=${encodeURIComponent(username)}`;
+            aElement.href += `&username=${username}`;
           }
         }
       })
