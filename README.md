@@ -1,9 +1,9 @@
 # Description
 This is a database-driven application using the following frameworks.
 
-FrontEnd: JavaScript(React) + HTML + CSS
+FrontEnd: HTML + CSS
 
-BackEnd: Java
+BackEnd: Java + Spring Boot
 
 Database: MySQL
 
@@ -12,9 +12,11 @@ https://www.kaggle.com/datasets/saurabhshahane/music-dataset-1950-to-2019.
 
 # How to Start
 
-Frontend: You may find the [readme file](front/README.md) under front folder helpful to run the react component.
+Be sure to run the backend part on Spring Boot Framework first.
 
-Backend: We use the Oracle OpenJDK Version 1.8.0_331 and IntelliJ build system to compile, build and run the Java code.
+Backend: We use the Oracle OpenJDK Version 20.0.1 and Gradle build system to compile, build and run the Java code.
+
+Frontend: Start from and run the welcome page and log in / sign up.
 
 Remember to install [Connector/J](https://dev.mysql.com/downloads/connector/j/) driver to connect MySQL on Java.
 
@@ -23,25 +25,26 @@ Remember to install [Connector/J](https://dev.mysql.com/downloads/connector/j/) 
 2. [Install MySQL MySQL Workbench](https://dev.mysql.com/downloads/workbench/).
 3. Create a new connection named **test** on localhost in MySQL Workbench.
 4. Run the query **sql/initDatabase.sql** in the Workbench.
-5. Now you have the sample database established.
+5. Now you have the database established.
+
+## Loading the production dataset into the database
+1. Run the query **sql/loadProductionDB.sql** in the Workbench.
 
 ## Backend
-1. Run the program.
-2. It requires input from the command-line.
-3. If you type show, it outputs all musics in the database.
-4. If you type search and some lyrics, it outputs the music name if there exists such a song. Otherwise, it prints no music found.
-5. If you type rate with mID, score and comment, it records your review in the database.
+1. Open the backend part on the IDE (e.g. IDEA).
+2. Compile and build the spring boot code.
+3. Run the main program.
+
+## Frontend
+1. Open the frontend part on the IDE (e.g. IDEA).
+2. Run the welcome.html.
 
 # Current Features
-1. Search for a song by some lyrics.
-2. Show all musics in the database.
-3. Rate a song with a score (out of 100) and a comment.
-4. If a user deletes his account, his reviews will be cleared as well.
-
-# To-do Lists
-1. Sample SQL code to initialize the database (reating tables, constraints, stored procedures and triggers). **DONE** (**sql/initDatabase.sql**)
-2. Simple test input and output (test-sample.sql, test-sample.out). **DONE** (**sql/test-sample.sql**, **sql/test-sample.out**)
-3. Search songs with input lyrics. **DONE** (**Backend**)
-4. Rate songs. **DONE** (**Backend**)
-5. Login system.
-6. Provide recommendation songs for users.
+1. Search for a song.
+2. Log in & Sign up system.
+3. Show all reviews of a user from most recent to lease recent.
+4. Show all reviews of a song from most recent to lease recent.
+5. Top 5 songs based on the average reviews by all users.
+6. Users can review any song in the database by giving a score (0 out of 5) and some comment.
+7. Determine users' favorite actist, song and genre based on their reviews.
+8. If a user deletes his account, his reviews will be cleared as well.
