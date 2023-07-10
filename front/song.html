@@ -73,6 +73,17 @@
       width: 75%;
     }
 
+    .comment-frame {
+      background-color: #4B4B4B;
+      padding: 20px;
+      color: white;
+      width: 100%;
+      margin: auto;
+      border-radius: 15px;
+      display: flex;
+      box-sizing: border-box;
+    }
+
   </style>
 </head>
 
@@ -246,7 +257,7 @@
     .then(response => response.json())
     .then(comments => {
       let commentsContainer = document.createElement('div');
-      commentDiv.classList.add("song-info-frame");
+      commentDiv.classList.add("comment-frame");
       commentDiv.style.width = '100%';
       commentsContainer.setAttribute('id', 'dynamicComments');
       document.body.appendChild(commentsContainer);
