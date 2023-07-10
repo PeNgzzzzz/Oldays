@@ -137,7 +137,7 @@
     const username = urlParams.get('username');
     localStorage.setItem('username', username);
 
-    fetch(`http://localhost:3306/getUserData?username=${username}`)
+    fetch(`http://localhost:8081/getUserData?username=${username}`)
       .then(response => response.json())
       .then(data => {
         const commentsTable = document.querySelector('#profileContent .profileSection:nth-child(1) table');
