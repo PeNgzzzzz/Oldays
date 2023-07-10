@@ -134,7 +134,7 @@
   var songName = urlParams.get('songName');
 
   fetch(`http://localhost:8081/songInfo`, {
-    method: 'GET',
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -217,7 +217,7 @@
 </div>
 
 <script>
-  fetch(`http://localhost:8081/songInfo`, {
+  fetch(`http://localhost:8081/getComments`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
