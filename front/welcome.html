@@ -67,7 +67,7 @@
         .then(response => response.json())
         .then(data => {
           if (data.success) {
-            window.location.href = './main-page.html?username=${username}';
+            window.location.href = `./main-page.html?username=${username}`;
           } else {
             alert('Incorrect username or password!');
             document.getElementById('username').value = '';
