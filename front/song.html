@@ -133,7 +133,13 @@
   var starContainer = document.querySelector(".star-container");
   var songName = urlParams.get('songName');
 
-  fetch(`http://localhost:8081/songInfo?songName=${encodeURIComponent(songName)}`)
+  fetch(`http://localhost:8081/songInfo`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({songName: songName})
+  })
     .then(response => response.json())
     .then(data => {
       songDetails.innerHTML = `
