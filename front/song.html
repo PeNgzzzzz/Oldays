@@ -198,14 +198,34 @@
     e.preventDefault();
     var rating = document.querySelector('input[name="rating"]:checked').value;
     var comment = document.getElementById('myComment').value;
-    if (rating && comment) {
-      fetch('http://localhost:8081/commentSong?songName=${encodeURIComponent(songName)}', {method: 'POST', body: JSON.stringify({rating: rating, comment: comment})});
-      console.log(`Rating: ${rating}, Comment: ${comment}`);
+    var username = urlParams.get('username');
+    
+    if (rating && comment && username) {
+      fetch('http://localhost:8081/commentSong', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          songName: songName,
+          userName: username,
+          rating: rating,
+          comment: comment
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+      })
+      .catch(err => {
+        console.error(err);
+      });
     } else {
       alert('Please rate and comment the song!');
     }
   });
 </script>
+
 
 <div class="space-separator"></div>
 
@@ -218,7 +238,7 @@
 
 <script>
   fetch(`http://localhost:8081/getComments`, {
-    method: 'GET',
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
