@@ -64,7 +64,6 @@
         },
         body: JSON.stringify({username, password})
       })
-<<<<<<< Updated upstream
         .then(response => response.json())
         .then(data => {
           if (data.success) {
@@ -76,19 +75,6 @@
           }
         })
         .catch(error => console.error('Error:', error));
-=======
-              .then(response => response.json())
-              .then(data => {
-                if (data.success) {
-                  window.location.href = './main-page.html?username=${username}';
-                } else {
-                  alert('Incorrect username or password!');
-                  document.getElementById('username').value = '';
-                  document.getElementById('password').value = '';
-                }
-              })
-              .catch(error => console.error('Error:', error));
->>>>>>> Stashed changes
     }
   </script>
 </head>
