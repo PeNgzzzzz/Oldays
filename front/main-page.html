@@ -241,7 +241,7 @@
             var username = localStorage.getItem('username');
             var url = `./song.html?songName=${encodeURIComponent(songName)}`;
             if (username) {
-              url += `&username=${encodeURIComponent(username)}`;
+              url += `&username=${username}`;
             }
             window.location.href = url;
           } else {
@@ -300,7 +300,7 @@
 
           aElement.href = `./song.html?songName=${encodeURIComponent(data[i].songName)}`;
           if (username) {
-            aElement.href += `&username=${encodeURIComponent(username)}`;
+            aElement.href += `&username=${username}`;
           }
         }
       })
