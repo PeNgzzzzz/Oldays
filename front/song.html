@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> Song Info </title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #add8e6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 75%;
+      margin-top: 20px;
+    }
+
+    input[type=text] {
+      width: 100%;
+      height: 50%;
+      padding: 12px 20px;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    .divider {
+      width: 75%;
+    }
+
+    .space-separator {
+      height: 20px;
+    }
+
+    .song-info-frame {
+      background-color: #4B4B4B;
+      padding: 20px;
+      color: white;
+      width: 60%;
+      margin: auto;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+    }
+
+    .song-info-frame img {
+      height: 100%;
+      margin-right: 20px;
+    }
+
+    .song-details {
+      flex-grow: 1;
+    }
+
+    .star-container {
+      display: flex;
+      margin-top: 20px;
+    }
+
+    .star {
+      height: 5px;
+      margin-right: 5px;
+    }
+
+    #CommentDiv {
+      width: 75%;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div id="header">
+  <img src="./photo/logo.png" alt="Logo" style="height:50px;">
+  <h2><a href="main-page.html" style="color: black; text-decoration: none;">Oldays</a></h2>
+  <h2><a id="playlistLink" href="playlist.html" style="color: black; text-decoration: none;">Playlist</a></h2>
+  <h2><a id="recommandationLink" href="recommandation.html" style="color: black; text-decoration: none;">Recommandations</a></h2>
+  <h2><a id="loginLink" href="welcome.html" style="color: black; text-decoration: none;">Login</a></h2>
+</div>
+
+<script>
+  var urlParams = new URLSearchParams(window.location.search);
+  var username = urlParams.get('username');
+  var loginLink = document.getElementById('loginLink');
+  var playlistLink = document.getElementById('playListLink');
+  var recommandationLink = document.getElementById('recommandationLink');
+
+  if (username) {
+    loginLink.textContent = 'Profile';
+    loginLink.href = `profile.html?username=${encodeURIComponent(username)}`;
+    playlistLink.href = `playlist.html?username=${encodeURIComponent(username)}`;
+    recommandationLink.href = `recommandation.html?username=${encodeURIComponent(username)}`;
+  } else {
+    loginLink.textContent = 'Login';
+    loginLink.href = './welcome.html';
+    playlistLink.href = './welcome.html';
+    recommandationLink.href = './welcome.html';
+  }
+</script>
+
+
+<hr class="divider">
+
+<div class="song-info-frame">
+  <img src="./photo/default_album.jpg" alt="Default album cover">
+
+  <div class="song-details">
+    <h2>ZheShiShaGeA</h2>
+    <p>Artist Bu Dao A</p>
+    <p>Genre Bu Dao A</p>
+    <p>There is no description currently.</p>
+
+    <div class="star-container">
+      <img class="star" src="./photo/star-empty.jpg" alt="Star 5" style="height:25px;">
+      <img class="star" src="./photo/star-empty.jpg" alt="Star 4" style="height:25px;">
+      <img class="star" src="./photo/star-filled.jpg" alt="Star 3" style="height:25px;">
+      <img class="star" src="./photo/star-filled.jpg" alt="Star 2" style="height:25px;">
+      <img class="star" src="./photo/star-filled.jpg" alt="Star 1" style="height:25px;">
+    </div>
+  </div>
+</div>
+
+<script>
+  var songDetails = document.querySelector(".song-info-frame .song-details");
+  var starContainer = document.querySelector(".star-container");
+  var songName = urlParams.get('songName');
+
+  fetch(`http://localhost:3306/songInfo?songName=${encodeURIComponent(songName)}`)
+    .then(response => response.json())
+    .then(data => {
+      songDetails.innerHTML = `
+        <h2>${data.mName}</h2>
+        <p>Artist: ${data.aName}</p>
+        <p>Genre: ${data.genre}</p>
+        <p>Topic: ${data.topic}</p>
+        <p>Lyrics: ${data.lyrics}</p>
+      `;
+
+      var starsHtml = '';
+      for (var i = 0; i < 5; i++) {
+        if (i < data.rating) {
+          starsHtml += '<img class="star" src="./photo/star-filled.jpg" alt="Star ' + (i + 1) + '" style="height:25px;">';
+        } else {
+          starsHtml += '<img class="star" src="./photo/star-empty.jpg" alt="Star ' + (i + 1) + '" style="height:25px;">';
+        }
+      }
+      starContainer.innerHTML = starsHtml;
+    })
+    .catch(err => {
+      console.error(err);
+    });
+</script>
+
+<div class="space-separator"></div>
+
+<div class="song-info-frame">
+  <img src="./photo/userDefault.png" alt="Default user picture" style="height:200px;">
+
+  <form id="reviewForm">
+    <div class="song-details">
+      <h2>Your comments:</h2>
+      <p>Rating: </p>
+      <div class="rating">
+        <input type="radio" name="rating" value="1"> 1
+        <input type="radio" name="rating" value="2"> 2
+        <input type="radio" name="rating" value="3"> 3
+        <input type="radio" name="rating" value="4"> 4
+        <input type="radio" name="rating" value="5"> 5
+      </div>
+
+      <div class="space-separator"></div>
+
+      <div id="CommentDiv">
+        <textarea id="myComment" name="comment" placeholder="Show everyone your idea .."></textarea>
+      </div>
+
+      <input type="submit" value="Submit">
+    </div>
+  </form>
+</div>
+
+<script>
+  document.getElementById('reviewForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var rating = document.querySelector('input[name="rating"]:checked').value;
+    var comment = document.getElementById('myComment').value;
+    if (rating && comment) {
+      fetch('http://localhost:3306/commentSong?songName=${encodeURIComponent(songName)}', {method: 'POST', body: JSON.stringify({rating: rating, comment: comment})});
+      console.log(`Rating: ${rating}, Comment: ${comment}`);
+    } else {
+      alert('Please rate and comment the song!');
+    }
+  });
+</script>
+
+<div class="space-separator"></div>
+
+<h1> Hear the voice of the others. </h1>
+
+<hr class="divider">
+
+<div id="comments">
+</div>
+
+<script>
+  fetch(`http://localhost:3306/getComments?songName=${encodeURIComponent(songName)}`)
+    .then(response => response.json())
+    .then(comments => {
+      var commentsDiv = document.getElementById('comments');
+      comments.forEach(comment => {
+        var commentHtml = `
+          <hr class="divider">
+
+          <div class="song-info-frame">
+            <img src="./photo/userDefault.png" alt="Default user picture" style="height:200px;">
+
+            <div class="song-details">
+              <h2>${comment.username}:</h2>
+              <p>Rating: ${comment.rating}</p>
+              <p>${comment.comment}</p>
+            </div>
+          </div>
+        `;
+        commentsDiv.innerHTML += commentHtml;
+      });
+    })
+    .catch(err => {
+      console.error(err);
+    });
+</script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> user profile </title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #add8e6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 75%;
+      margin-top: 20px;
+    }
+
+    #profileContent {
+      width: 75%;
+    }
+
+    .profileSection {
+      margin-top: 20px;
+      border: 3px solid #4B4B4B;
+      padding: 20px;
+      background-color: #4B4B4B;
+      color: #FFFFFF;
+    }
+
+    .profileSection h3 {
+      text-decoration: underline;
+    }
+
+    .profileSection table {
+      width: 100%;
+    }
+
+    .profileSection table td, .profileSection table th {
+      border: 1px solid #ddd;
+      padding: 8px;
+      color: #FFFFFF;
+    }
+
+    .profileSection table th {
+      background-color: #f2f2f2;
+      color: #4B4B4B;
+    }
+
+    #signOutButton {
+      background-color: #4B4B4B;
+      color: white;
+      border: none;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 20px 2px;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div id="header">
+  <img src="./photo/logo.png" alt="Logo" style="height:50px;">
+  <h2><a href="main-page.html" style="color: black; text-decoration: none;">Oldays</a></h2>
+  <h2><a id="PlaylistLink" href="playlist.html" style="color: black; text-decoration: none;">Playlist</a></h2>
+  <h2><a id="RecommandationLink" href="recommandation.html" style="color: black; text-decoration: none;">Recommandations</a></h2>
+  <h2><a id="Profilelink" href="profile.html" style="color: black; text-decoration: none;">Profile</a></h2>
+</div>
+
+<hr class="divider">
+
+<div id="profileContent">
+  <div class="profileSection">
+    <h3>My Comments</h3>
+    <table>
+      <tr>
+        <th>Song</th>
+        <th>Comment</th>
+        <th>Date</th>
+      </tr>
+    </table>
+  </div>
+
+  <div class="profileSection">
+    <h3>My Highest Rated Songs</h3>
+    <table>
+      <tr>
+        <th>Song</th>
+        <th>Rating</th>
+      </tr>
+    </table>
+  </div>
+
+  <div class="profileSection">
+    <h3>My Favorite Artists</h3>
+    <table>
+      <tr>
+        <th>Artist</th>
+      </tr>
+    </table>
+  </div>
+
+  <div class="profileSection">
+    <h3>My Preferred Genres</h3>
+    <table>
+      <tr>
+        <th>Genre</th>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<button id="signOutButton" onclick="handleSignOut()">Sign Out</button>
+
+<script>
+  function handleSignOut() {
+    alert('You have signed out');
+    window.location.href = './welcome.html';
+  }
+</script>
+
+<script>
+  window.onload = function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const username = urlParams.get('username');
+    localStorage.setItem('username', username);
+
+    fetch(`http://localhost:3306/getUserData?username=${username}`)
+      .then(response => response.json())
+      .then(data => {
+        const commentsTable = document.querySelector('#profileContent .profileSection:nth-child(1) table');
+        data.comments.forEach(comment => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${comment.song}</td>
+            <td>${comment.text}</td>
+            <td>${comment.date}</td>
+          `;
+          commentsTable.appendChild(row);
+        });
+
+        const highestRatedSongsTable = document.querySelector('#profileContent .profileSection:nth-child(2) table');
+        data.highestRatedSongs.forEach(song => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${song.name}</td>
+            <td>${song.rating}</td>
+          `;
+          highestRatedSongsTable.appendChild(row);
+        });
+
+        const favoriteArtistsTable = document.querySelector('#profileContent .profileSection:nth-child(3) table');
+        data.favoriteArtists.forEach(artist => {
+          const row = document.createElement('tr');
+          row.innerHTML = `<td>${artist}</td>`;
+          favoriteArtistsTable.appendChild(row);
+        });
+
+        const preferredGenresTable = document.querySelector('#profileContent .profileSection:nth-child(4) table');
+        data.preferredGenres.forEach(genre => {
+          const row = document.createElement('tr');
+          row.innerHTML = `<td>${genre}</td>`;
+          preferredGenresTable.appendChild(row);
+        });
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  };
+</script>
+
+</body>
+
+</html>

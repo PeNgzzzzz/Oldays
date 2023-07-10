@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> main page </title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #add8e6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 75%;
+      margin-top: 20px;
+    }
+
+    #searchDiv {
+      width: 75%;
+    }
+
+    input[type=text] {
+      width: 100%;
+      padding: 12px 20px;
+      margin-top: 5%;
+      margin: 80px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    .musicContainer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      width: 30%;
+      margin-bottom: 20px;
+      margin-top: 20px;
+    }
+
+    .musicInfo {
+      text-align: left;
+      flex-grow: 1;
+    }
+
+    .spaceBlock {
+      width: 10%;
+    }
+
+    .noteAnimation {
+      flex-grow: 1;
+      text-align: right;
+    }
+
+    .divider {
+      width: 75%;
+    }
+
+    .musicContainer {
+      display: none;
+    }
+
+    .arrow {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 16px;
+      color: black;
+      font-weight: bold;
+      font-size: 20px;
+      transition: 0.6s ease;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+    }
+
+    .left {
+      left: 0;
+      border-radius: 3px 0 0 3px;
+    }
+
+    .right {
+      right: 0;
+      border-radius: 0 3px 3px 0;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div id="header">
+  <img src="./photo/logo.png" alt="Logo" style="height:50px;">
+  <h2><a id="mainPageLink" href="main-page.html" style="color: black; text-decoration: none;">Oldays</a></h2>
+  <h2><a id="playListLink" href="playlist.html" style="color: black; text-decoration: none;">Playlist</a></h2>
+  <h2><a id="recommandationLink" href="recommandation.html" style="color: black; text-decoration: none;">Recommandations</a></h2>
+  <h2><a id="loginLink" href="welcome.html" style="color: black; text-decoration: none;">Login</a></h2>
+</div>
+
+<hr class="divider">
+
+<div id="searchDiv">
+  <input type="text" id="mySearch" onkeyup="handleKeyUp(event)" placeholder="Find the song hiding in your memory .." title="Type in a category">
+</div>
+
+<h2>Top 5 Songs from the 90s</h2>
+<p style="text-align: center; color: gray;">Based on the ratings from all viewers.</p>
+
+
+<div class="musicContainer">
+  <div class="arrow left" onclick="changeSlide(-1)">&#10094;</div>
+  <div class="noteAnimation">
+    <a href="song.html">
+      <img src="./photo/default_album.jpg" style="height:10%;" alt="default album">
+    </a>
+  </div>
+  <div class="spaceBlock"></div>
+  <div class="musicInfo">
+    <h2>Song 1</h2>
+    <h3>Artist: BuDaoA</h3>
+    <h3>Genre: Classical</h3>
+  </div>
+  <div class="arrow right" onclick="changeSlide(1)">&#10095;</div>
+</div>
+
+<div class="musicContainer">
+  <div class="arrow left" onclick="changeSlide(-1)">&#10094;</div>
+  <div class="noteAnimation">
+    <a href="song.html">
+      <img src="./photo/default_album.jpg" style="height:10%;" alt="default album">
+    </a>
+  </div>
+  <div class="spaceBlock"></div>
+  <div class="musicInfo">
+    <h2>Song 2</h2>
+    <h3>Artist: NiZhiDaoMe</h3>
+    <h3>Genre: Classical</h3>
+  </div>
+  <div class="arrow right" onclick="changeSlide(1)">&#10095;</div>
+</div>
+
+<div class="musicContainer">
+  <div class="arrow left" onclick="changeSlide(-1)">&#10094;</div>
+  <div class="noteAnimation">
+    <a href="song.html">
+      <img src="./photo/default_album.jpg" style="height:10%;" alt="default album">
+    </a>
+  </div>
+  <div class="spaceBlock"></div>
+  <div class="musicInfo">
+    <h2>Song 3</h2>
+    <h3>Artist: WoYeBuDaoA</h3>
+    <h3>Genre: Classical</h3>
+  </div>
+  <div class="arrow right" onclick="changeSlide(1)">&#10095;</div>
+</div>
+
+<div class="musicContainer">
+  <div class="arrow left" onclick="changeSlide(-1)">&#10094;</div>
+  <div class="noteAnimation">
+    <a href="song.html">
+      <img src="./photo/default_album.jpg" style="height:10%;" alt="default album">
+    </a>
+  </div>
+  <div class="spaceBlock"></div>
+  <div class="musicInfo">
+    <h2>Song 4</h2>
+    <h3>Artist: NaSheiZhiDao</h3>
+    <h3>Genre: Classical</h3>
+  </div>
+  <div class="arrow right" onclick="changeSlide(1)">&#10095;</div>
+</div>
+
+<div class="musicContainer">
+  <div class="arrow left" onclick="changeSlide(-1)">&#10094;</div>
+  <div class="noteAnimation">
+    <a href="song.html">
+      <img src="./photo/default_album.jpg" style="height:10%;" alt="default album">
+    </a>
+  </div>
+  <div class="spaceBlock"></div>
+  <div class="musicInfo">
+    <h2>Song 5</h2>
+    <h3>Artist: BuZhiDao</h3>
+    <h3>Genre: Classical</h3>
+  </div>
+  <div class="arrow right" onclick="changeSlide(1)">&#10095;</div>
+</div>
+
+
+
+<script>
+  var slideIndex = 0;
+  showSlide(slideIndex);
+
+  function changeSlide(n) {
+    showSlide(slideIndex += n);
+  }
+
+  function showSlide(n) {
+    var i;
+    var slides = document.getElementsByClassName("musicContainer");
+    if (n >= slides.length) {slideIndex = 0}
+    if (n < 0) {slideIndex = slides.length - 1}
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    slides[slideIndex].style.display = "flex";
+  }
+
+</script>
+
+<script>
+  var username = localStorage.getItem('username');
+  if (username) {
+    var loginLink = document.getElementById('loginLink');
+    loginLink.textContent = username;
+    loginLink.href = 'profile.html';
+  }
+
+  function handleKeyUp(event) {
+    if (event.key === "Enter") {
+      var songName = document.getElementById('mySearch').value;
+      fetch(`http://localhost:3306/search?songName=${encodeURIComponent(songName)}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.found) {
+            var username = localStorage.getItem('username');
+            var url = `./song.html?songName=${encodeURIComponent(songName)}`;
+            if (username) {
+              url += `&username=${encodeURIComponent(username)}`;
+            }
+            window.location.href = url;
+          } else {
+            alert('Song not found!');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+  }
+
+
+</script>
+
+<script>
+  window.onload = function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const username = urlParams.get('username');
+    localStorage.setItem('username', username);
+
+    var loginLink = document.getElementById('loginLink');
+    var mainPageLink = document.getElementById('mainPageLink');
+    var playlistLink = document.getElementById('playListLink');
+    var recommandationLink = document.getElementById('recommandationLink');
+
+    if (username) {
+      loginLink.textContent = 'Profile';
+      loginLink.href = `./profile.html?username=${username}`;
+      mainPageLink.href = `./main-page.html?username=${username}`;
+      playlistLink.href = `./playlist.html?username=${username}`;
+      recommandationLink.href = `./recommandation.html?username=${username}`;
+    } else {
+      loginLink.textContent = 'Login';
+      loginLink.href = './welcome.html';
+      playlistLink.href = './welcome.html';
+      recommandationLink.href = './welcome.html';
+    }
+
+    var musicContainers = document.getElementsByClassName('musicContainer');
+
+    fetch('http://localhost:3306/topFive')
+      .then(response => response.json())
+      .then(data => {
+        for (var i = 0; i < data.length; i++) {
+          var musicInfo = musicContainers[i].querySelector('.musicInfo');
+          var h2Elements = musicInfo.getElementsByTagName('h2');
+          var h3Elements = musicInfo.getElementsByTagName('h3');
+          var noteAnimation = musicContainers[i].querySelector('.noteAnimation');
+          var aElement = noteAnimation.getElementsByTagName('a')[0];
+
+          h2Elements[0].textContent = data[i].songName;
+          h3Elements[0].textContent = 'Artist: ' + data[i].artist;
+          h3Elements[1].textContent = 'Genre: ' + data[i].genre;
+
+          aElement.href = `./song.html?songName=${encodeURIComponent(songName)}`;
+          if (username) {
+            aElement.href += `&username=${encodeURIComponent(username)}`;
+          }
+        }
+      })
+      .catch(error => console.error('Error:', error));
+  };
+</script>
+
+</body>
+
+</html>
