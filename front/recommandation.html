@@ -217,7 +217,7 @@
   function handleKeyUp(event) {
     if (event.key === "Enter") {
       var songName = document.getElementById('mySearch').value;
-      fetch(`http://localhost:3306/search?songName=${encodeURIComponent(songName)}`)
+      fetch(`http://localhost:8081/search?songName=${encodeURIComponent(songName)}`)
         .then(response => response.json())
         .then(data => {
           if (data.found) {
@@ -266,7 +266,7 @@
 
     var musicContainers = document.getElementsByClassName('musicContainer');
 
-    fetch(`http://localhost:3306/recommandateFive?username=${username}`)
+    fetch(`http://localhost:8081/recommandateFive?username=${username}`)
       .then(response => response.json())
       .then(data => {
         for (var i = 0; i < data.length; i++) {
