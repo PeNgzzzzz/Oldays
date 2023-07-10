@@ -134,7 +134,7 @@
   var songName = urlParams.get('songName');
 
   fetch(`http://localhost:8081/songInfo`, {
-    method: 'POST',
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -217,7 +217,13 @@
 </div>
 
 <script>
-  fetch(`http://localhost:8081/getComments?songName=${encodeURIComponent(songName)}`)
+  fetch(`http://localhost:8081/songInfo`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({songName: songName})
+  })
     .then(response => response.json())
     .then(comments => {
       var commentsDiv = document.getElementById('comments');
