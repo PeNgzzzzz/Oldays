@@ -216,6 +216,8 @@
       .then(response => response.json())
       .then(data => {
         console.log(data);
+        comment.value = '';
+        rating.checked = false;
       })
       .catch(err => {
         console.error(err);
@@ -249,8 +251,6 @@
       var commentsDiv = document.getElementById('comments');
       comments.forEach(comment => {
         var commentHtml = `
-          <hr class="divider">
-
           <div class="song-info-frame">
             <img src="./photo/userDefault.png" alt="Default user picture" style="height:200px;">
 
