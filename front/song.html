@@ -246,6 +246,9 @@
 
 <hr class="divider">
 
+<div id="comments">
+</div>
+
 <script>
   fetch(`http://localhost:8081/getComments`, {
     method: 'POST',
@@ -256,39 +259,20 @@
   })
     .then(response => response.json())
     .then(comments => {
-      let commentsContainer = document.createElement('div');
-      commentDiv.classList.add("comment-frame");
-      commentDiv.style.width = '100%';
-      commentsContainer.setAttribute('id', 'dynamicComments');
-      document.body.appendChild(commentsContainer);
-      
+      var commentsDiv = document.getElementById('comments');
       comments.forEach(comment => {
-        var commentDiv = document.createElement('div');
-        commentDiv.classList.add("song-info-frame");
+        var commentHtml = `
+          <div class="comment-frame">
+            <img src="./photo/userDefault.png" alt="Default user picture" style="height:200px;">
 
-        var imgTag = document.createElement('img');
-        imgTag.setAttribute("src", "./photo/userDefault.png");
-        imgTag.setAttribute("alt", "Default user picture");
-        imgTag.style.height = '200px';
-        commentDiv.appendChild(imgTag);
-        
-        var songDetailsDiv = document.createElement('div');
-        songDetailsDiv.classList.add("song-details");
-
-        var h2Tag = document.createElement('h2');
-        h2Tag.textContent = `${comment.username}:`;
-        songDetailsDiv.appendChild(h2Tag);
-
-        var pRatingTag = document.createElement('p');
-        pRatingTag.textContent = `Rating: ${comment.rating}`;
-        songDetailsDiv.appendChild(pRatingTag);
-
-        var pCommentTag = document.createElement('p');
-        pCommentTag.textContent = comment.comment;
-        songDetailsDiv.appendChild(pCommentTag);
-
-        commentDiv.appendChild(songDetailsDiv);
-        commentsContainer.appendChild(commentDiv);
+            <div class="song-details">
+              <h2>${comment.username}:</h2>
+              <p>Rating: ${comment.rating}</p>
+              <p>${comment.comment}</p>
+            </div>
+          </div>
+        `;
+        commentsDiv.innerHTML += commentHtml;
       });
     })
     .catch(err => {
