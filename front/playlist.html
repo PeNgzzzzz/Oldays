@@ -270,30 +270,20 @@
 
     var musicContainers = document.getElementsByClassName('musicContainer');
 
-    fetch('http://localhost:8081/playListFive', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({username: username})
-    })
+    fetch(`http://localhost:8081/playListFive`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({username: username})
+      })
       .then(response => response.json())
       .then(data => {
         for (var i = 0; i < data.length; i++) {
-          var musicInfo = musicContainers[i].querySelector('.musicInfo');
-          var h2Elements = musicInfo.getElementsByTagName('h2');
-          var h3Elements = musicInfo.getElementsByTagName('h3');
-          var noteAnimation = musicContainers[i].querySelector('.noteAnimation');
-          var aElement = noteAnimation.getElementsByTagName('a')[0];
-
-          h2Elements[0].textContent = data[i].songName;
-          h3Elements[0].textContent = 'Artist: ' + data[i].artist;
-          h3Elements[1].textContent = 'Genre: ' + data[i].genre;
-
-          aElement.href = `./song.html?songName=${encodeURIComponent(data[i].songName)}`;
-          if (username) {
-            aElement.href += `&username=${username}`;
-          }
+          document.getElementById('song' + (i+1)).innerText = data[i].songName;
+          document.getElementById('artist' + (i+1)).innerText = 'Artist: ' + data[i].artist;
+          document.getElementById('genre' + (i+1)).innerText = 'Genre: ' + data[i].genre;
+          document.getElementById('link' + (i+1)).href = `./song.html?songName=${encodeURIComponent(data[i].songName)}`;
         }
       })
       .catch(error => console.error('Error:', error));
