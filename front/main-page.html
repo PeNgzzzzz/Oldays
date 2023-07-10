@@ -228,7 +228,13 @@
   function handleKeyUp(event) {
     if (event.key === "Enter") {
       var songName = document.getElementById('mySearch').value;
-      fetch(`http://localhost:8081/search?songName=${songName}`)
+      fetch(`http://localhost:8081/search`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({songName: songName})
+      })
         .then(response => response.json())
         .then(data => {
           if (data.found) {
@@ -247,9 +253,8 @@
         });
     }
   }
-
-
 </script>
+
 
 <script>
   window.onload = function() {
