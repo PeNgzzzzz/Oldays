@@ -95,9 +95,9 @@
 
   if (username) {
     loginLink.textContent = 'Profile';
-    loginLink.href = `profile.html?username=${encodeURIComponent(username)}`;
-    playlistLink.href = `playlist.html?username=${encodeURIComponent(username)}`;
-    recommandationLink.href = `recommandation.html?username=${encodeURIComponent(username)}`;
+    loginLink.href = `profile.html?username=${username}`;
+    playlistLink.href = `playlist.html?username=${username}`;
+    recommandationLink.href = `recommandation.html?username=${username}`;
   } else {
     loginLink.textContent = 'Login';
     loginLink.href = './welcome.html';
