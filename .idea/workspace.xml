@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b3e0a89a-fc7e-4b01-8405-8f363f35fc2c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/back/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/back/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/back/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/.idea/sqldialects.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/Back.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/DBconnection.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/welcome.html" beforeDir="false" afterPath="$PROJECT_DIR$/back/welcome.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sql/initDatabase.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql/initDatabase.sql" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2SM7Fsz6d50sCD0Ld5uwpsQGcLc" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/wilson/Documents/GitHub/CS-348",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/back" />
+      <recent name="$PROJECT_DIR$/back/src/main/java" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b3e0a89a-fc7e-4b01-8405-8f363f35fc2c" name="Changes" comment="" />
+      <created>1688944495881</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1688944495881</updated>
+      <workItem from="1688944496885" duration="119000" />
+      <workItem from="1688945083867" duration="179000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
