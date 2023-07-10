@@ -282,7 +282,9 @@
 
     var musicContainers = document.getElementsByClassName('musicContainer');
 
-    fetch('http://localhost:8081/topFive')
+    fetch('http://localhost:8081/topFive', {
+      method: 'GET',
+    })
       .then(response => response.json())
       .then(data => {
         for (var i = 0; i < data.length; i++) {
