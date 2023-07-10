@@ -41,7 +41,6 @@
 
     .song-info-frame {
       background-color: #4B4B4B;
-      max-height: 500px;
       padding: 20px;
       color: white;
       width: 60%;
@@ -49,7 +48,6 @@
       border-radius: 15px;
       display: flex;
       align-items: center;
-      overflow: auto;
     }
 
     .song-info-frame img {
@@ -59,10 +57,14 @@
 
     .song-details {
       flex-grow: 1;
-      margin-left: 20px;
-      overflow: auto;
-      word-wrap: break-word;
     }
+
+    .song-info-frame img, .song-details {
+      flex: 1;
+      width: 50%;
+    }
+
+    
 
     .star-container {
       display: flex;
