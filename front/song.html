@@ -133,7 +133,7 @@
   var starContainer = document.querySelector(".star-container");
   var songName = urlParams.get('songName');
 
-  fetch(`http://localhost:3306/songInfo?songName=${encodeURIComponent(songName)}`)
+  fetch(`http://localhost:8081/songInfo?songName=${encodeURIComponent(songName)}`)
     .then(response => response.json())
     .then(data => {
       songDetails.innerHTML = `
@@ -193,7 +193,7 @@
     var rating = document.querySelector('input[name="rating"]:checked').value;
     var comment = document.getElementById('myComment').value;
     if (rating && comment) {
-      fetch('http://localhost:3306/commentSong?songName=${encodeURIComponent(songName)}', {method: 'POST', body: JSON.stringify({rating: rating, comment: comment})});
+      fetch('http://localhost:8081/commentSong?songName=${encodeURIComponent(songName)}', {method: 'POST', body: JSON.stringify({rating: rating, comment: comment})});
       console.log(`Rating: ${rating}, Comment: ${comment}`);
     } else {
       alert('Please rate and comment the song!');
@@ -211,7 +211,7 @@
 </div>
 
 <script>
-  fetch(`http://localhost:3306/getComments?songName=${encodeURIComponent(songName)}`)
+  fetch(`http://localhost:8081/getComments?songName=${encodeURIComponent(songName)}`)
     .then(response => response.json())
     .then(comments => {
       var commentsDiv = document.getElementById('comments');
@@ -236,9 +236,6 @@
       console.error(err);
     });
 </script>
-
-
-
 
 </body>
 </html>
