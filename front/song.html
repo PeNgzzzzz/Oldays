@@ -82,6 +82,7 @@
       border-radius: 15px;
       display: flex;
       box-sizing: border-box;
+      align-items: center;
     }
 
     .comment-frame img {
@@ -253,8 +254,6 @@
 
 <h1> Hear the voice of the others. </h1>
 
-<hr class="divider">
-
 <div id="comments">
 </div>
 
@@ -271,6 +270,7 @@
       var commentsDiv = document.getElementById('comments');
       comments.forEach(comment => {
         var commentHtml = `
+          <hr class="divider">
           <div class="comment-frame">
             <img src="./photo/userDefault.png" alt="Default user picture" style="height:200px;">
 
