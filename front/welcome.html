@@ -64,6 +64,7 @@
         },
         body: JSON.stringify({username, password})
       })
+<<<<<<< Updated upstream
         .then(response => response.json())
         .then(data => {
           if (data.success) {
@@ -75,6 +76,19 @@
           }
         })
         .catch(error => console.error('Error:', error));
+=======
+              .then(response => response.json())
+              .then(data => {
+                if (data.success) {
+                  window.location.href = './main-page.html?username=${username}';
+                } else {
+                  alert('Incorrect username or password!');
+                  document.getElementById('username').value = '';
+                  document.getElementById('password').value = '';
+                }
+              })
+              .catch(error => console.error('Error:', error));
+>>>>>>> Stashed changes
     }
   </script>
 </head>
@@ -83,7 +97,11 @@
 <div class="login-container">
   <h1 id="title" style="text-align: center;">Welcome to Oldays</h1>
 
+<<<<<<< Updated upstream
   <p style="text-align: center; color: gray;">A throwback to the beats of 90s ... </p>
+=======
+  <p style="text-align: center; color: gray;">A throwback to the beats of 90s ... </p >
+>>>>>>> Stashed changes
   <form onsubmit="submitForm(event)">
     <label for="username">User name:</label>
     <input type="text" id="username" name="username" required oninvalid="this.setCustomValidity('Username is required')" oninput="this.setCustomValidity('')">

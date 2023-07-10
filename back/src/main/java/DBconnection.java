@@ -63,7 +63,7 @@ public class DBconnection {
         }
     }
 
-    private void searchMusicsByLyrics(String name) {
+    private void searchMusicsByLyrics(String lyrics) {
         Statement stmt = null;
         try{
             stmt = connection.createStatement();
