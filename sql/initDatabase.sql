@@ -28,6 +28,7 @@ CREATE TABLE Reviews
     mID INT REFERENCES Musics(mID),
     rating INT CHECK (rating >= 0 AND rating <= 5),
     comment TEXT,
+    dt DATE,
     -- In case users delete their account
     CONSTRAINT FOREIGN KEY (userName) REFERENCES Users(userName) ON DELETE CASCADE
   ); 

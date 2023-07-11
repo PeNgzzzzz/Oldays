@@ -1,7 +1,7 @@
 -- Assume addTestMusics.sql and addTestUsers.sql have been run
 
 -- Assume user with userName testUser1 is rating on music with mID 1
-INSERT INTO Reviews (userName, mID, rating, comment) VALUES ('testUser1', 1, 88.88, 'nice song!');
+INSERT INTO Reviews (userName, mID, rating, comment, dt) VALUES ('testUser1', 1, 5, 'nice song!', curdate());
 SELECT * FROM Reviews;
 
 -- Assume user wants to see all musics in the database
