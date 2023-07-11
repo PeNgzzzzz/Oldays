@@ -137,6 +137,24 @@
     const username = urlParams.get('username');
     localStorage.setItem('username', username);
 
+    var loginLink = document.getElementById('loginLink');
+    var mainPageLink = document.getElementById('mainPageLink');
+    var playlistLink = document.getElementById('playListLink');
+    var recommandationLink = document.getElementById('recommandationLink');
+
+    if (username) {
+      loginLink.textContent = 'Profile';
+      loginLink.href = `./profile.html?username=${username}`;
+      mainPageLink.href = `./main-page.html?username=${username}`;
+      playlistLink.href = `./playlist.html?username=${username}`;
+      recommandationLink.href = `./recommandation.html?username=${username}`;
+    } else {
+      loginLink.textContent = 'Login';
+      loginLink.href = './welcome.html';
+      playlistLink.href = './welcome.html';
+      recommandationLink.href = './welcome.html';
+    }
+
     fetch(`http://localhost:8081/getUserData`, {
       method: 'POST',
       headers: {
