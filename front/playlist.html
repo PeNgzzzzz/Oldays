@@ -271,7 +271,11 @@
     var musicContainers = document.getElementsByClassName('musicContainer');
 
     fetch('http://localhost:8081/playListFive', {
-      method: 'GET',
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({username: username})
     })
       .then(response => response.json())
       .then(data => {
