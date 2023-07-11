@@ -1,7 +1,7 @@
 # Description
 This is a database-driven application using the following frameworks.
 
-FrontEnd: HTML + CSS
+FrontEnd: JavaScript + HTML + CSS
 
 BackEnd: Java + Spring Boot
 
