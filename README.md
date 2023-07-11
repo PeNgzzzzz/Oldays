@@ -28,7 +28,7 @@ Remember to install [Connector/J](https://dev.mysql.com/downloads/connector/j/) 
 5. Now you have the database established.
 
 ## Loading the production dataset into the database
-1. Make sure enable this to the MySQL: **mysql --local_infile=1 -u root -ppassword DB_name**.
+1. Make sure enable this in the MySQL: **mysql --local_infile=1 -u root -ppassword DB_name**.
 2. Run the query **sql/loadProductionDB.sql** in the Workbench.
 
 ## Backend
