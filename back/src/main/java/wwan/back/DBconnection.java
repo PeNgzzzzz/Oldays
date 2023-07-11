@@ -129,18 +129,15 @@ public class DBconnection {
         try{
             stmt = connection.createStatement();
             String sql;
-            sql = "SELECT count(*) FROM Reviews";
+            sql = "WITH T AS (SELECT mName, aName, genre FROM Reviews NATURAL JOIN Musics GROUP BY mID ORDER BY AVG(rating) DESC LIMIT 5) SELECT COUNT(*) FROM T;";
             ResultSet rs = stmt.executeQuery(sql);
             rs.next();
             num = rs.getInt(1);
-            if (num < 5) sql = "SELECT mName, aName, genre FROM Musics";
-            else sql = "SELECT mName, aName, genre FROM Reviews NATURAL JOIN Musics GROUP BY mID ORDER BY AVG(rating) DESC";
+            if (num < 5) sql = "SELECT mName, aName, genre FROM Musics LIMIT 5";
+            else sql = "SELECT mName, aName, genre FROM Reviews NATURAL JOIN Musics GROUP BY mID ORDER BY AVG(rating) DESC LIMIT 5";
             rs = stmt.executeQuery(sql);
-            int i = 1;
-            while (i <= 5) {
-                rs.next();
+            while (rs.next()) {
                 result.add(Map.of("songName", rs.getString(1), "artist", rs.getString(2), "genre", rs.getString(3)));
-                i++;
             }
             rs.close();
             stmt.close();
@@ -157,18 +154,15 @@ public class DBconnection {
         try{
             stmt = connection.createStatement();
             String sql;
-            sql = "SELECT count(*) FROM Reviews WHERE userName LIKE '" + userName + "'";
+            sql = "WITH T AS (SELECT DISTINCT mName, aName, genre FROM Reviews NATURAL JOIN Musics WHERE userName LIKE '" + userName + "') SELECT COUNT(*) FROM T";
             ResultSet rs = stmt.executeQuery(sql);
             rs.next();
             num = rs.getInt(1);
-            if (num < 5) sql = "SELECT mName, aName, genre FROM Musics";
-            else sql = "SELECT mName, aName, genre FROM Reviews NATURAL JOIN Musics WHERE userName LIKE '" + userName + "'";
+            if (num < 5) sql = "SELECT mName, aName, genre FROM Musics LIMIT 5";
+            else sql = "SELECT mName, aName, genre FROM Reviews NATURAL JOIN Musics WHERE userName LIKE '" + userName + "' LIMIT 5";
             rs = stmt.executeQuery(sql);
-            int i = 1;
-            while (i <= 5) {
-                rs.next();
+            while (rs.next()) {
                 result.add(Map.of("songName", rs.getString(1), "artist", rs.getString(2), "genre", rs.getString(3)));
-                i++;
             }
             rs.close();
             stmt.close();
@@ -181,30 +175,24 @@ public class DBconnection {
     public List<Map<String, String>> recommend(String userName) {
         Statement stmt = null;
         List<Map<String, String>> result = new ArrayList<>();
-        int num;
         try{
             stmt = connection.createStatement();
             String sql;
-            sql = "SELECT * FROM Reviews WHERE userName LIKE '" + userName + "' order by dt DESC";
+            sql = "SELECT * FROM Reviews NATURAL JOIN Musics WHERE userName LIKE '" + userName + "' order by dt DESC";
             ResultSet rs = stmt.executeQuery(sql);
             if (rs.next()) {
                 int rating = rs.getInt("rating");
                 int mID = rs.getInt("mID");
-                ResultSet rss = stmt.executeQuery("SELECT mName, aName, genre FROM Musics WHERE mID = " + mID);
-                rss.next();
-                String genre = rss.getString("genre");
-                rss.close();
+                String genre = rs.getString("genre");
                 if (rating >= 3) {
-                    sql = "SELECT mName, aName, genre FROM Musics WHERE genre LIKE '" + genre + "'";
+                    sql = "SELECT mName, aName, genre FROM Musics WHERE genre LIKE '" + genre + "' LIMIT 5";
                 } else {
-                    sql = "SELECT mName, aName, genre FROM Musics WHERE genre NOT LIKE '" + genre + "'";
+                    sql = "SELECT mName, aName, genre FROM Musics WHERE genre NOT LIKE '" + genre + "' LIMIT 5";
                 }
-            } else sql = "SELECT mName, aName, genre FROM Musics";
+            } else sql = "SELECT mName, aName, genre FROM Musics LIMIT 5";
             rs = stmt.executeQuery(sql);
-            int i = 1;
-            while (i <= 5 && rs.next()) {
+            while (rs.next()) {
                 result.add(Map.of("songName", rs.getString(1), "artist", rs.getString(2), "genre", rs.getString(3)));
-                i++;
             }
             rs.close();
             stmt.close();
@@ -229,7 +217,7 @@ public class DBconnection {
                 String mName = rs.getString("mName");
                 Date dt = rs.getDate("dt");
                 String comment = rs.getString("comment");
-                comments.add(Map.of("song", mName, "text", comment, "data", dt.toString()));
+                comments.add(Map.of("song", mName, "text", comment, "date", dt.toString()));
             }
             sql = "SELECT mName, aName, genre, AVG(rating) as rating FROM Reviews NATURAL JOIN Users NATURAL JOIN Musics WHERE userName LIKE '" + userName + "' GROUP BY mID HAVING AVG(rating) > 3 ORDER BY AVG(rating) DESC";
             rs = stmt.executeQuery(sql);
