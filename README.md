@@ -43,9 +43,10 @@ Remember to install [Connector/J](https://dev.mysql.com/downloads/connector/j/) 
 # Current Features
 1. Search for a song.
 2. Log in & Sign up system.
-3. Show all reviews of a user from most recent to lease recent.
-4. Show all reviews of a song from most recent to lease recent.
+3. Show all reviews of a user/song from most recent to least recent.
+4. Show all reviews of a song from most recent to least recent.
 5. Top 5 songs based on the average reviews by all users.
 6. Users can review any song in the database by giving a score (0 out of 5) and some comment.
 7. Determine users' favorite actist, song and genre based on their reviews.
 8. If a user deletes his account, his reviews will be cleared as well.
+9. Personalized recommendations.
