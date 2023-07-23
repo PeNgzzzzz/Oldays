@@ -7,7 +7,10 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #add8e6;
+      background-image: url('photo/bc_pho/2.png');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -77,20 +80,11 @@
       background-color: #4B4B4B;
       padding: 20px;
       color: white;
-      width: 600px;
+      width: 60%;
       margin: auto;
       border-radius: 15px;
       display: flex;
-      align-items: center;
-    }
-
-    .comment-frame img {
-      height: 100%;
-      margin-right: 20px;
-    }
-
-    .comment-details {
-      flex-grow: 1;
+      box-sizing: border-box;
     }
 
   </style>
@@ -219,7 +213,7 @@
     var rating = document.querySelector('input[name="rating"]:checked').value;
     var comment = document.getElementById('myComment').value;
     var username = urlParams.get('username');
-    
+
     if (rating && comment && username) {
       fetch('http://localhost:8081/commentSong', {
         method: 'POST',
@@ -233,16 +227,15 @@
           comment: comment
         })
       })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        comment.value = '';
-        rating.checked = false;
-      })
-      .catch(err => {
-        console.error(err);
-      });
-      window.location.reload();
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          comment.value = '';
+          rating.checked = false;
+        })
+        .catch(err => {
+          console.error(err);
+        });
     } else {
       alert('Please rate and comment the song!');
     }
@@ -253,6 +246,8 @@
 <div class="space-separator"></div>
 
 <h1> Hear the voice of the others. </h1>
+
+<hr class="divider">
 
 <div id="comments">
 </div>
@@ -270,11 +265,10 @@
       var commentsDiv = document.getElementById('comments');
       comments.forEach(comment => {
         var commentHtml = `
-          <hr class="divider">
           <div class="comment-frame">
             <img src="./photo/userDefault.png" alt="Default user picture" style="height:200px;">
 
-            <div class="comment-details">
+            <div class="song-details">
               <h2>${comment.username}:</h2>
               <p>Rating: ${comment.rating}</p>
               <p>${comment.comment}</p>
@@ -288,6 +282,33 @@
       console.error(err);
     });
 </script>
+
+<div class="comment-frame">
+  <img src="./photo/userDefault.png" alt="Default user picture" style="height:200px;">
+  <div class="song-details">
+    <h2>user1:</h2>
+    <p>Rating: 4</p>
+    <p>Great song!</p>
+  </div>
+</div>
+
+<div class="comment-frame">
+  <img src="./photo/userDefault.png" alt="Default user picture" style="height:200px;">
+  <div class="song-details">
+    <h2>user2:</h2>
+    <p>Rating: 5</p>
+    <p>I love this!</p>
+  </div>
+</div>
+
+<div class="comment-frame">
+  <img src="./photo/userDefault.png" alt="Default user picture" style="height:200px;">
+  <div class="song-details-details">
+    <h2>user3:</h2>
+    <p>Rating: 3</p>
+    <p>Not bad.</p>
+  </div>
+</div>
 
 
 </body>
