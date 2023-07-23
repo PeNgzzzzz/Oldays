@@ -7,7 +7,10 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #add8e6;
+      background-image: url('photo/bc_pho/2.png');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -39,7 +42,7 @@
     .musicContainer {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
       width: 30%;
       margin-bottom: 20px;
       margin-top: 20px;
@@ -48,6 +51,14 @@
     .musicInfo {
       text-align: left;
       flex-grow: 1;
+    }
+
+    .spaceBlock {
+      width: 10%;
+    }
+
+    .heightBlock {
+      height: 120px;
     }
 
     .noteAnimation {
@@ -87,6 +98,15 @@
       border-radius: 0 3px 3px 0;
     }
 
+    .backgroundImage {
+      position: absolute;
+      width: 30%;
+      height: 30%;
+      z-index: -1;
+      justify-content: center;
+      opacity: 0.2;
+    }
+
   </style>
 </head>
 
@@ -109,78 +129,89 @@
 <h2>The Song that you rated ..</h2>
 <p style="text-align: center; color: gray;">Enjoy ..</p>
 
+<div class="heightBlock"></div>
 
 <div class="musicContainer">
   <div class="arrow left" onclick="changeSlide(-1)">&#10094;</div>
+  <div class="noteAnimation">
+    <a href="song.html">
+      <img src="./photo/default_album.jpg" style="height:10%;" alt="default album">
+    </a>
+  </div>
+  <img class="backgroundImage" src="photo/music_bg_grey/6.png" alt="Background">
+  <div class="spaceBlock"></div>
   <div class="musicInfo">
     <h2>Song 1</h2>
     <h3>Artist: BuDaoA</h3>
     <h3>Genre: Classical</h3>
   </div>
-  <div class="noteAnimation">
-    <a href="song.html">
-      <img src="./photo/default_album.jpg" style="height:10%;" alt="default album">
-    </a>
-  </div>
   <div class="arrow right" onclick="changeSlide(1)">&#10095;</div>
 </div>
 
 <div class="musicContainer">
   <div class="arrow left" onclick="changeSlide(-1)">&#10094;</div>
+  <div class="noteAnimation">
+    <a href="song.html">
+      <img src="./photo/default_album.jpg" style="height:10%;" alt="default album">
+    </a>
+  </div>
+  <img class="backgroundImage" src="photo/music_bg_grey/5.png" alt="Background">
+  <div class="spaceBlock"></div>
   <div class="musicInfo">
     <h2>Song 2</h2>
     <h3>Artist: NiZhiDaoMe</h3>
     <h3>Genre: Classical</h3>
   </div>
-  <div class="noteAnimation">
-    <a href="song.html">
-      <img src="./photo/default_album.jpg" style="height:10%;" alt="default album">
-    </a>
-  </div>
   <div class="arrow right" onclick="changeSlide(1)">&#10095;</div>
 </div>
 
 <div class="musicContainer">
   <div class="arrow left" onclick="changeSlide(-1)">&#10094;</div>
+  <div class="noteAnimation">
+    <a href="song.html">
+      <img src="./photo/default_album.jpg" style="height:10%;" alt="default album">
+    </a>
+  </div>
+  <img class="backgroundImage" src="photo/music_bg_grey/5.png" alt="Background">
+  <div class="spaceBlock"></div>
   <div class="musicInfo">
     <h2>Song 3</h2>
     <h3>Artist: WoYeBuDaoA</h3>
     <h3>Genre: Classical</h3>
   </div>
-  <div class="noteAnimation">
-    <a href="song.html">
-      <img src="./photo/default_album.jpg" style="height:10%;" alt="default album">
-    </a>
-  </div>
   <div class="arrow right" onclick="changeSlide(1)">&#10095;</div>
 </div>
 
 <div class="musicContainer">
   <div class="arrow left" onclick="changeSlide(-1)">&#10094;</div>
+  <div class="noteAnimation">
+    <a href="song.html">
+      <img src="./photo/default_album.jpg" style="height:10%;" alt="default album">
+    </a>
+  </div>
+  <img class="backgroundImage" src="photo/music_bg_grey/5.png" alt="Background">
+  <div class="spaceBlock"></div>
   <div class="musicInfo">
     <h2>Song 4</h2>
     <h3>Artist: NaSheiZhiDao</h3>
     <h3>Genre: Classical</h3>
   </div>
-  <div class="noteAnimation">
-    <a href="song.html">
-      <img src="./photo/default_album.jpg" style="height:10%;" alt="default album">
-    </a>
-  </div>
   <div class="arrow right" onclick="changeSlide(1)">&#10095;</div>
 </div>
 
 <div class="musicContainer">
   <div class="arrow left" onclick="changeSlide(-1)">&#10094;</div>
-  <div class="musicInfo">
-    <h2>Song 5</h2>
-    <h3>Artist: BuZhiDao</h3>
-    <h3>Genre: Classical</h3>
-  </div>
   <div class="noteAnimation">
     <a href="song.html">
       <img src="./photo/default_album.jpg" style="height:10%;" alt="default album">
     </a>
+  </div>
+  <img class="backgroundImage" src="photo/music_bg_grey/5.png" alt="Background">
+  <div class="spaceBlock"></div>
+  <div class="musicInfo">
+    <h2>Song 5</h2>
+    <h3>Artist: BuZhiDao</h3>
+    <h3>Genre: Classical</h3>
   </div>
   <div class="arrow right" onclick="changeSlide(1)">&#10095;</div>
 </div>
@@ -217,20 +248,14 @@
   function handleKeyUp(event) {
     if (event.key === "Enter") {
       var songName = document.getElementById('mySearch').value;
-      fetch(`http://localhost:8081/search`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({songName: songName})
-      })
+      fetch(`http://localhost:3306/search?songName=${encodeURIComponent(songName)}`)
         .then(response => response.json())
         .then(data => {
           if (data.found) {
             var username = localStorage.getItem('username');
             var url = `./song.html?songName=${encodeURIComponent(songName)}`;
             if (username) {
-              url += `&username=${username}`;
+              url += `&username=${encodeURIComponent(username)}`;
             }
             window.location.href = url;
           } else {
@@ -242,6 +267,8 @@
         });
     }
   }
+
+
 </script>
 
 <script>
@@ -269,14 +296,17 @@
     }
 
     var musicContainers = document.getElementsByClassName('musicContainer');
+    var imageNumbers = Array.from({length: 8}, (_, i) => i + 1);
 
-    fetch('http://localhost:8081/playListFive', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({username: username})
-    })
+    for (var i = 0; i < musicContainers.length; i++) {
+      var bgImage = musicContainers[i].querySelector('.backgroundImage');
+      var randomIndex = Math.floor(Math.random() * imageNumbers.length);
+      var chosenImage = imageNumbers[randomIndex];
+      bgImage.src = `photo/music_bg_grey/${chosenImage}.png`;
+      imageNumbers.splice(randomIndex, 1);
+    }
+
+    fetch('http://localhost:3306/playListFive?username=${username}')
       .then(response => response.json())
       .then(data => {
         for (var i = 0; i < data.length; i++) {
@@ -290,9 +320,9 @@
           h3Elements[0].textContent = 'Artist: ' + data[i].artist;
           h3Elements[1].textContent = 'Genre: ' + data[i].genre;
 
-          aElement.href = `./song.html?songName=${encodeURIComponent(data[i].songName)}`;
+          aElement.href = `./song.html?songName=${encodeURIComponent(songName)}`;
           if (username) {
-            aElement.href += `&username=${username}`;
+            aElement.href += `&username=${encodeURIComponent(username)}`;
           }
         }
       })
