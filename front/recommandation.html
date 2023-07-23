@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title> main page </title>
+  <title> recommandation </title>
 
   <style>
     body {
@@ -126,8 +126,8 @@
   <input type="text" id="mySearch" onkeyup="handleKeyUp(event)" placeholder="Find the song hiding in your memory .." title="Type in a category">
 </div>
 
-<h2>Top 5 Songs from the 90s</h2>
-<p style="text-align: center; color: gray;">Based on the ratings from all viewers.</p>
+<h2>Five songs that we recommend for you</h2>
+<p style="text-align: center; color: gray;">Based on the ratings that you made.</p>
 
 <div class="heightBlock"></div>
 
@@ -216,8 +216,6 @@
   <div class="arrow right" onclick="changeSlide(1)">&#10095;</div>
 </div>
 
-
-
 <script>
   var slideIndex = 0;
   showSlide(slideIndex);
@@ -250,14 +248,20 @@
   function handleKeyUp(event) {
     if (event.key === "Enter") {
       var songName = document.getElementById('mySearch').value;
-      fetch(`http://localhost:3306/search?songName=${encodeURIComponent(songName)}`)
+      fetch(`http://localhost:8081/search`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({songName: songName})
+      })
         .then(response => response.json())
         .then(data => {
           if (data.found) {
             var username = localStorage.getItem('username');
             var url = `./song.html?songName=${encodeURIComponent(songName)}`;
             if (username) {
-              url += `&username=${encodeURIComponent(username)}`;
+              url += `&username=${username}`;
             }
             window.location.href = url;
           } else {
@@ -269,8 +273,6 @@
         });
     }
   }
-
-
 </script>
 
 <script>
@@ -308,7 +310,13 @@
       imageNumbers.splice(randomIndex, 1);
     }
 
-    fetch('http://localhost:3306/topFive')
+    fetch('http://localhost:8081/recommandateFive', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({username: username})
+    })
       .then(response => response.json())
       .then(data => {
         for (var i = 0; i < data.length; i++) {
@@ -322,9 +330,9 @@
           h3Elements[0].textContent = 'Artist: ' + data[i].artist;
           h3Elements[1].textContent = 'Genre: ' + data[i].genre;
 
-          aElement.href = `./song.html?songName=${encodeURIComponent(songName)}`;
+          aElement.href = `./song.html?songName=${encodeURIComponent(data[i].songName)}`;
           if (username) {
-            aElement.href += `&username=${encodeURIComponent(username)}`;
+            aElement.href += `&username=${username}`;
           }
         }
       })
