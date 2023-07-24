@@ -55,7 +55,7 @@
   </style>
   <script>
     window.onload = function() {
-      var imageNumber = Math.floor(Math.random() * 8) + 1;
+      var imageNumber = Math.floor(Math.random() * 10) + 1;
       document.body.style.backgroundImage = "url('photo/bc_pho/" + imageNumber + ".png')";
     };
 
@@ -64,7 +64,7 @@
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
 
-      fetch('http://localhost:3306/login', {
+      fetch('http://localhost:8081/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -74,7 +74,7 @@
         .then(response => response.json())
         .then(data => {
           if (data.success) {
-            window.location.href = './main-page.html?username=${username}';
+            window.location.href = `./main-page.html?username=${username}`;
           } else {
             alert('Incorrect username or password!');
             document.getElementById('username').value = '';
