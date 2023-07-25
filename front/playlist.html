@@ -244,18 +244,23 @@
     loginLink.textContent = username;
     loginLink.href = 'profile.html';
   }
-
   function handleKeyUp(event) {
     if (event.key === "Enter") {
       var songName = document.getElementById('mySearch').value;
-      fetch(`http://localhost:8081/search?songName=${encodeURIComponent(songName)}`)
+      fetch(`http://localhost:8081/search`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({songName: songName})
+      })
         .then(response => response.json())
         .then(data => {
           if (data.found) {
             var username = localStorage.getItem('username');
             var url = `./song.html?songName=${encodeURIComponent(songName)}`;
             if (username) {
-              url += `&username=${encodeURIComponent(username)}`;
+              url += `&username=${username}`;
             }
             window.location.href = url;
           } else {
@@ -267,8 +272,6 @@
         });
     }
   }
-
-
 </script>
 
 <script>
@@ -292,20 +295,14 @@
       playlistLink.href = './welcome.html';
       recommandationLink.href = './welcome.html';
     }
-
     var musicContainers = document.getElementsByClassName('musicContainer');
-    var imageNumbers = Array.from({length: 8}, (_, i) => i + 1);
 
-    for (var i = 0; i < musicContainers.length; i++) {
-      var bgImage = musicContainers[i].querySelector('.backgroundImage');
-      var randomIndex = Math.floor(Math.random() * imageNumbers.length);
-      var chosenImage = imageNumbers[randomIndex];
-      bgImage.src = `photo/music_bg_grey/${chosenImage}.png`;
-      imageNumbers.splice(randomIndex, 1);
-    }
-
-    fetch('http://localhost:8081/playListFive?username=${username}', {
+    fetch('http://localhost:8081/playListFive', {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({username: username})
     })
       .then(response => response.json())
       .then(data => {
