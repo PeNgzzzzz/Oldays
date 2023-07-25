@@ -276,12 +276,10 @@
     const urlParams = new URLSearchParams(window.location.search);
     const username = urlParams.get('username');
     localStorage.setItem('username', username);
-
     var loginLink = document.getElementById('loginLink');
     var mainPageLink = document.getElementById('mainPageLink');
     var playlistLink = document.getElementById('playListLink');
     var recommandationLink = document.getElementById('recommandationLink');
-
     if (username) {
       loginLink.textContent = 'Profile';
       loginLink.href = `./profile.html?username=${username}`;
@@ -306,9 +304,7 @@
       imageNumbers.splice(randomIndex, 1);
     }
 
-    fetch(`http://localhost:8081/playListFive?username=${username}`, {
-      method: 'POST',
-    })
+    fetch('http://localhost:8081/playListFive?username=${username}')
       .then(response => response.json())
       .then(data => {
         for (var i = 0; i < data.length; i++) {
@@ -317,14 +313,12 @@
           var h3Elements = musicInfo.getElementsByTagName('h3');
           var noteAnimation = musicContainers[i].querySelector('.noteAnimation');
           var aElement = noteAnimation.getElementsByTagName('a')[0];
-
           h2Elements[0].textContent = data[i].songName;
           h3Elements[0].textContent = 'Artist: ' + data[i].artist;
           h3Elements[1].textContent = 'Genre: ' + data[i].genre;
-
-          aElement.href = `./song.html?songName=${encodeURIComponent(data[i].songName)}`;
+          aElement.href = `./song.html?songName=${encodeURIComponent(songName)}`;
           if (username) {
-            aElement.href += `&username=${username}`;
+            aElement.href += `&username=${encodeURIComponent(username)}`;
           }
         }
       })
