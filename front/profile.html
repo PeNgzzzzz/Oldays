@@ -143,21 +143,31 @@
     const username = urlParams.get('username');
     localStorage.setItem('username', username);
 
+    var loginLink = document.getElementById('loginLink');
     var mainPageLink = document.getElementById('mainPageLink');
     var playlistLink = document.getElementById('playListLink');
     var recommandationLink = document.getElementById('recommandationLink');
-    var profileLink = document.getElementById("Profilelink")
+
     if (username) {
+      loginLink.textContent = 'Profile';
+      loginLink.href = `./profile.html?username=${username}`;
       mainPageLink.href = `./main-page.html?username=${username}`;
       playlistLink.href = `./playlist.html?username=${username}`;
       recommandationLink.href = `./recommandation.html?username=${username}`;
-      profileLink.href = `./profile.html?username=${username}`;
     } else {
+      loginLink.textContent = 'Login';
+      loginLink.href = './welcome.html';
       playlistLink.href = './welcome.html';
       recommandationLink.href = './welcome.html';
     }
 
-    fetch(`http://localhost:8081/getUserData?username=${username}`)
+    fetch(`http://localhost:8081/getUserData`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({username: username})
+    })
       .then(response => response.json())
       .then(data => {
         const commentsTable = document.querySelector('#profileContent .profileSection:nth-child(1) table');
@@ -170,7 +180,6 @@
           `;
           commentsTable.appendChild(row);
         });
-
         const highestRatedSongsTable = document.querySelector('#profileContent .profileSection:nth-child(2) table');
         data.highestRatedSongs.forEach(song => {
           const row = document.createElement('tr');
@@ -180,14 +189,12 @@
           `;
           highestRatedSongsTable.appendChild(row);
         });
-
         const favoriteArtistsTable = document.querySelector('#profileContent .profileSection:nth-child(3) table');
         data.favoriteArtists.forEach(artist => {
           const row = document.createElement('tr');
           row.innerHTML = `<td>${artist.name}</td>`;
           favoriteArtistsTable.appendChild(row);
         });
-
         const preferredGenresTable = document.querySelector('#profileContent .profileSection:nth-child(4) table');
         data.preferredGenres.forEach(genre => {
           const row = document.createElement('tr');
@@ -200,6 +207,8 @@
       });
   };
 </script>
+
+
 
 </body>
 
