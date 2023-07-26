@@ -92,8 +92,8 @@
   <h2><a id="loginLink" href="welcome.html" style="color: black; text-decoration: none;">Login</a></h2>
 </div>
 <script>
-  const urlParams = new URLSearchParams(window.location.search);
-  const username = urlParams.get('username');
+  var urlParams = new URLSearchParams(window.location.search);
+  var username = urlParams.get('username');
   localStorage.setItem('username', username);
   var loginLink = document.getElementById('loginLink');
   var mainPageLink = document.getElementById('mainPageLink');
@@ -133,6 +133,7 @@
   var songDetails = document.querySelector(".song-info-frame .song-details");
   var starContainer = document.querySelector(".star-container");
   var songName = urlParams.get('songName');
+  var username = urlParams.get('username');
   fetch(`http://localhost:8081/songInfo`, {
     method: 'POST',
     headers: {
