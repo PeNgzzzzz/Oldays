@@ -7,7 +7,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-image: url('photo/bc_pho/2.png');
+      background-image: url('photo/music_bg_grey/2.png');
       background-repeat: no-repeat;
       background-attachment: fixed;
       background-size: cover;
@@ -79,7 +79,7 @@
   <h2><a id="mainPageLink" href="main-page.html" style="color: black; text-decoration: none;">Oldays</a></h2>
   <h2><a id="playListLink" href="playlist.html" style="color: black; text-decoration: none;">Playlist</a></h2>
   <h2><a id="recommandationLink" href="recommandation.html" style="color: black; text-decoration: none;">Recommendations</a></h2>
-  <h2><a id="Profilelink" href="profile.html" style="color: black; text-decoration: none;">Profile</a></h2>
+  <h2><a id="loginLink" href="welcome.html" style="color: black; text-decoration: none;">Login</a></h2>
 </div>
 
 <hr class="divider">
@@ -136,8 +136,6 @@
 
 <script>
   window.onload = function() {
-    var imageNumber = Math.floor(Math.random() * 8) + 1;
-    document.body.style.backgroundImage = "url('photo/bc_pho/" + imageNumber + ".png')";
 
     const urlParams = new URLSearchParams(window.location.search);
     const username = urlParams.get('username');
