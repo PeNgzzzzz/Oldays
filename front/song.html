@@ -6,7 +6,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-image: url('photo/music_bg_grey/2.png');
+      background-image: url('photo/bc_pho/2.png');
       background-repeat: no-repeat;
       background-attachment: fixed;
       background-size: cover;
@@ -92,27 +92,25 @@
   <h2><a id="loginLink" href="welcome.html" style="color: black; text-decoration: none;">Login</a></h2>
 </div>
 <script>
-  window.onload = function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const username = urlParams.get('username');
-    localStorage.setItem('username', username);
-    var loginLink = document.getElementById('loginLink');
-    var mainPageLink = document.getElementById('mainPageLink');
-    var playlistLink = document.getElementById('playListLink');
-    var recommandationLink = document.getElementById('recommandationLink');
-    if (username) {
-      loginLink.textContent = 'Profile';
-      loginLink.href = `./profile.html?username=${username}`;
-      mainPageLink.href = `./main-page.html?username=${username}`;
-      playlistLink.href = `./playlist.html?username=${username}`;
-      recommandationLink.href = `./recommandation.html?username=${username}`;
-    } else {
-      loginLink.textContent = 'Login';
-      loginLink.href = './welcome.html';
-      playlistLink.href = './welcome.html';
-      recommandationLink.href = './welcome.html';
-    }
-  };
+  const urlParams = new URLSearchParams(window.location.search);
+  const username = urlParams.get('username');
+  localStorage.setItem('username', username);
+  var loginLink = document.getElementById('loginLink');
+  var mainPageLink = document.getElementById('mainPageLink');
+  var playlistLink = document.getElementById('playListLink');
+  var recommandationLink = document.getElementById('recommandationLink');
+  if (username) {
+    loginLink.textContent = 'Profile';
+    loginLink.href = `./profile.html?username=${username}`;
+    mainPageLink.href = `./main-page.html?username=${username}`;
+    playlistLink.href = `./playlist.html?username=${username}`;
+    recommandationLink.href = `./recommandation.html?username=${username}`;
+  } else {
+    loginLink.textContent = 'Login';
+    loginLink.href = './welcome.html';
+    playlistLink.href = './welcome.html';
+    recommandationLink.href = './welcome.html';
+  }
 </script>
 <hr class="divider">
 <div class="song-info-frame">
