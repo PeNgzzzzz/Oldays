@@ -47,6 +47,7 @@ public class Music {
         String name = info.get("songName");
         DBconnection db = new DBconnection();
         Map<String, String> result = db.songInfo(name);
+        System.out.println(result);
         db.exit();
         return ResponseEntity.ok(result);
     }
@@ -68,6 +69,8 @@ public class Music {
         String name = info.get("songName");
         DBconnection db = new DBconnection();
         List<Map<String, String>> result = db.getComments(name);
+        System.out.println(name);
+        System.out.println(result);
         db.exit();
         return ResponseEntity.ok(result);
     }

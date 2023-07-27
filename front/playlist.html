@@ -107,6 +107,19 @@
       opacity: 0.2;
     }
 
+    #sharingButton {
+      background-color: #4B4B4B;
+      color: white;
+      border: none;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 20px 2px;
+      cursor: pointer;
+    }
+
   </style>
 </head>
 
@@ -215,6 +228,31 @@
   </div>
   <div class="arrow right" onclick="changeSlide(1)">&#10095;</div>
 </div>
+
+<buttun id="sharingButton" onclick="handleSharing()">Show your playlist</buttun>
+
+
+<script>
+  function handleSharing() {
+    var info = "songName | artist | genre\n";
+    fetch('http://localhost:8081/playListFive', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({username: username})
+    })
+            .then(response => response.json())
+            .then(data => {
+              for (var i = 0; i < data.length; i++) {
+                info += data[i].songName + " | " + data[i].artist + " | " + data[i].genre + "\n";
+              }
+              alert(info);
+            })
+            .catch(error => console.error('Error:', error));
+
+  }
+</script>
 
 <script>
   var slideIndex = 0;

@@ -69,6 +69,19 @@
       cursor: pointer;
     }
 
+    #deleteAccButton {
+      background-color: #4B4B4B;
+      color: white;
+      border: none;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 20px 2px;
+      cursor: pointer;
+    }
+
   </style>
 </head>
 
@@ -127,9 +140,19 @@
 
 <button id="signOutButton" onclick="handleSignOut()">Sign Out</button>
 
+<buttun id="deleteAccButton" onclick="handleDelete()">Delete Account</buttun>
+
+
+<script>
+  function handleDelete() {
+    alert('You have delete the account!')
+    window.location.href = './welcome.html'
+  }
+</script>
+
 <script>
   function handleSignOut() {
-    alert('You have signed out');
+    alert('You have signed out!');
     window.location.href = './welcome.html';
   }
 </script>

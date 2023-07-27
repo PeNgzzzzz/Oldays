@@ -26,7 +26,8 @@ CREATE TABLE Reviews
     rID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     userName VARCHAR(50) NOT NULL,
     mID INT REFERENCES Musics(mID),
-    rating INT CHECK (rating >= 0 AND rating <= 5),
+    rating INT CHECK (rating >= 1 AND rating <= 5),
+    likes INT NOT NULL CHECK (likes >= 0),
     comment TEXT,
     dt DATE,
     -- In case users delete their account

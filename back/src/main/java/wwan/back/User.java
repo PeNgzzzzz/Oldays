@@ -36,6 +36,7 @@ public class User {
         String username = info.get("username");
         DBconnection db = new DBconnection();
         Map<String, List<Map<String, String>>> result = db.userData(username);
+        System.out.println(result);
         db.exit();
         return ResponseEntity.ok(result);
     }
